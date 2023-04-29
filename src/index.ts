@@ -22,7 +22,7 @@ const main = async () => {
 
     const { body, statusCode } = await getUsersController.handle()
 
-    return response.status(statusCode).send(body)
+    return response.status(statusCode).json(body)
   })
 
   app.post('/users', async (request, response) => {
@@ -34,7 +34,7 @@ const main = async () => {
       body: request.body,
     })
 
-    return response.status(statusCode).send(body)
+    return response.status(statusCode).json(body)
   })
 
   const port = process.env.PORT || 3000
