@@ -1,17 +1,14 @@
 import { IUser } from '../../models/Users'
 import { HttpRequest, HttpResponse } from '../protocols'
-import {
-  ICreateUserController,
-  ICreateUserParams,
-  ICreateUserRepository,
-} from './protocols'
+import { ICreateUserController, ICreateUserRepository } from './protocols'
+
+type IRequest = HttpRequest<IUser>
+type IResponse = HttpResponse<IUser>
 
 export class CreateUserController implements ICreateUserController {
   constructor(private readonly createUserRepository: ICreateUserRepository) {}
 
-  async handle(
-    HttpRequest: HttpRequest<ICreateUserParams>
-  ): Promise<HttpResponse<IUser | string>> {
+  async handle(HttpRequest: IRequest): Promise<IResponse> {
     try {
       if (!HttpRequest.body) {
         return {
@@ -19,6 +16,7 @@ export class CreateUserController implements ICreateUserController {
           body: 'Please specify a body',
         }
       }
+
       const user = await this.createUserRepository.createUser(HttpRequest.body)
 
       return {

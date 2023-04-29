@@ -1,6 +1,7 @@
 import { IUser } from '../../models/Users'
 import { HttpRequest, HttpResponse } from '../protocols'
 
+type IRequest = HttpRequest<IUser>
 type IResponse = HttpResponse<IUser>
 
 export interface ICreateUserParams {
@@ -11,9 +12,7 @@ export interface ICreateUserParams {
 }
 
 export interface ICreateUserController {
-  handle(
-    HttpRequest: HttpRequest<ICreateUserParams>
-  ): Promise<IResponse | string>
+  handle(HttpRequest: IRequest): Promise<IResponse>
 }
 
 export interface ICreateUserRepository {

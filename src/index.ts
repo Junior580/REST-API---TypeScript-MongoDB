@@ -13,6 +13,8 @@ const main = async () => {
 
   await mongoClient.connect()
 
+  app.use(express.json())
+
   app.get('/users', async (request, response) => {
     const userRepo = new MongoGetUsersRepository()
 
@@ -23,13 +25,17 @@ const main = async () => {
     return response.status(statusCode).send(body)
   })
 
-  // app.post('/', async (req, res) => {
-  //   const userRepo = new MongoCreateUserRepository()
+  app.post('/users', async (request, response) => {
+    const userRepo = new MongoCreateUserRepository()
 
-  //   const createUserController = new CreateUserController(userRepo)
+    const createUserController = new CreateUserController(userRepo)
 
-  //   const {body, statusCode } = createUserController.handle({req.body})
-  // })
+    const { statusCode, body } = await createUserController.handle({
+      body: request.body,
+    })
+
+    return response.status(statusCode).send(body)
+  })
 
   const port = process.env.PORT || 3000
 
