@@ -4,6 +4,7 @@ import {
   ICreateUserRepository,
 } from '../../controllers/createUsers/protocols'
 import { IUser } from '../../models/Users'
+import { HttpRequest, HttpResponse } from '../../controllers/protocols'
 
 export class MongoCreateUserRepository implements ICreateUserRepository {
   async createUser(params: ICreateUserParams): Promise<IUser> {

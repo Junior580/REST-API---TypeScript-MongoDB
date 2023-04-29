@@ -13,23 +13,23 @@ const main = async () => {
 
   await mongoClient.connect()
 
-  app.get('/users', async (req, res) => {
+  app.get('/users', async (request, response) => {
     const userRepo = new MongoGetUsersRepository()
 
     const getUsersController = new GetUsersController(userRepo)
 
-    const response = await getUsersController.handle()
+    const { body, statusCode } = await getUsersController.handle()
 
-    return res.status(response.statusCode).send(response.body)
+    return response.status(statusCode).send(body)
   })
 
-  app.post('/', async (req, res) => {
-    const userRepo = new MongoCreateUserRepository()
+  // app.post('/', async (req, res) => {
+  //   const userRepo = new MongoCreateUserRepository()
 
-    const createUserController = new CreateUserController(userRepo)
+  //   const createUserController = new CreateUserController(userRepo)
 
-    const {body, statusCode } = createUserController.handle({req.body})
-  })
+  //   const {body, statusCode } = createUserController.handle({req.body})
+  // })
 
   const port = process.env.PORT || 3000
 

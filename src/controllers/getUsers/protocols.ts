@@ -1,10 +1,10 @@
 import { IUser } from '../../models/Users'
 import { HttpResponse } from '../protocols'
 
-type IResponse = HttpResponse<IUser[]>
+type IReponse = HttpResponse<IUser[]>
 
 export interface IGetUsersController {
-  handle(): Promise<IResponse>
+  handle(): Promise<IReponse>
 }
 
 export interface IGetUsersRepository {
