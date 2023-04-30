@@ -5,6 +5,7 @@ import {
 } from '../../controllers/updateUser/protocols'
 import { mongoClient } from '../../database/mongo'
 import { IUser } from '../../models/Users'
+import { MongoUser } from '../mongoProtocols'
 
 export class MongoUpdateUserRepository implements IUpdateUserRepository {
   async updateUser(id: string, params: IUpdateUserParams): Promise<IUser> {
@@ -20,7 +21,7 @@ export class MongoUpdateUserRepository implements IUpdateUserRepository {
     )
 
     const user = await mongoClient.db
-      .collection<Omit<IUser, 'id'>>('users')
+      .collection<MongoUser>('users')
       .findOne({ _id: new ObjectId(id) })
 
     if (!user) throw new Error('User not updated')
