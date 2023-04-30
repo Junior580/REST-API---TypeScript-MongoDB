@@ -1,5 +1,4 @@
 import { IUser } from '../../models/Users'
-import { HttpResponse, HttpRequest } from '../protocols'
 
 export interface IUpdateUserParams {
   firstName?: string
