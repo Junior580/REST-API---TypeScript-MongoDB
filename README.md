@@ -4,10 +4,10 @@
 
 # Tecnologias usadas no projeto
 
-NodeJS
-Typescript
-Express
-Docker
-PostgreSQL
-MongoDB
-Redis
+- NodeJS
+- Typescript
+- Express
+- Docker
+- PostgreSQL
+- MongoDB
+- Redis
